@@ -1,4 +1,4 @@
-import DummyClass from '../src/react-mock'
+import Server, { Server as ServerClass } from '../src/react-mock'
 
 /**
  * Dummy test
@@ -9,6 +9,6 @@ describe('Dummy test', () => {
   })
 
   it('DummyClass is instantiable', () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
+    expect(Server).toBeInstanceOf(ServerClass)
   })
 })
