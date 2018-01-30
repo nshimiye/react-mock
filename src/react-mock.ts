@@ -14,10 +14,10 @@ export interface IDataGenerator {
 }
 class DataGenerator implements IDataGenerator {
   nextObject<T>(count: number, schema: T): { [id: string]: T } {
-    return {}
+    throw new Error('NOT Implemented')
   }
   nextArray<T>(count: number, schema: T): Array<T> {
-    return []
+    throw new Error('NOT Implemented')
   }
   next<T>(
     count: number,
@@ -37,7 +37,7 @@ function* Uid() {
 }
 // END helper functions
 
-export class Server {
+export default class ServerClass {
   on(): Promise<null | Error> {
     return Promise.reject(new Error('NOT Implemented'))
   }
@@ -52,4 +52,4 @@ export class Server {
 
 export const Faker = faker
 export const uid = Uid()
-export default new Server()
+export const Server = new ServerClass()

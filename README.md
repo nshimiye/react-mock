@@ -8,7 +8,7 @@ Mocking api calls from React Applications, using Pretenderjs and Fakerjs.
 import { Server, Faker, uid } from 'react-mock'
 const apiRoute = '/api/v1/guides'
 
-const todo = {
+const todoSchema = {
   content: Faker.lorem.sentence(),
   createdAt: Faker.date.past()
 }
