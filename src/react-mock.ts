@@ -24,7 +24,7 @@ class DataGenerator implements IDataGenerator {
     let createData = (schema: any) => {
       return {
         id: uid.next().value,
-        ...Object.keys(schema).reduce((ac, key) => {
+        ...Object.keys(schema).reduce((ac: { [key: string]: any }, key) => {
           ac[key] =
             typeof schema[key] === 'function' ? schema[key]() : schema[key]
           return ac
