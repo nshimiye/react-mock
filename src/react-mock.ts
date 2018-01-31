@@ -1,9 +1,9 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import "core-js/fn/array.find"
 // ...
-import * as uuidV4 from 'uuid/v4'
-import * as faker from 'faker'
-import * as pretender from 'pretender'
+import faker from 'faker'
+import Pretender, { ResponseData } from 'pretender'
+import { request } from 'http'
 
 // START helper functions
 export interface IDataGenerator {
@@ -18,7 +18,22 @@ class DataGenerator implements IDataGenerator {
     throw new Error('NOT Implemented')
   }
   nextArray<T>(count: number, schema: T): Array<T> {
-    throw new Error('NOT Implemented')
+    // throw new Error('NOT Implemented')
+
+    // START create object based on the schema
+    let createData = (schema: any) => {
+      return {
+        id: uid.next().value,
+        ...Object.keys(schema).reduce((ac, key) => {
+          ac[key] =
+            typeof schema[key] === 'function' ? schema[key]() : schema[key]
+          return ac
+        }, {})
+      }
+    }
+    // END create object based on the schema
+
+    return Array.apply(null, { length: count }).map(() => createData(schema))
   }
   next<T>(
     count: number,
@@ -33,21 +48,51 @@ class DataGenerator implements IDataGenerator {
 }
 function* Uid() {
   while (true) {
-    yield uuidV4()
+    yield Faker.random.uuid()
   }
 }
 // END helper functions
 
 export default class ServerClass {
+  private pretender: Pretender
+  private routeMapList: Array<() => void> = []
+
+  constructor(private dataGenerator: IDataGenerator = new DataGenerator()) {}
+
   on(): Promise<null | Error> {
-    return Promise.reject(new Error('NOT Implemented'))
+    return new Promise(resolve => {
+      this.pretender = new Pretender(...this.routeMapList)
+      return resolve()
+    })
+  }
+
+  off(): Promise<null | Error> {
+    return new Promise(resolve => {
+      this.pretender.shutdown()
+      return resolve()
+    })
   }
 
   mockGet(
-    endpoint: string,
-    handler: (req: Object, generator: IDataGenerator) => void
+    endPoint: string,
+    handler: (
+      req: Object,
+      generator: IDataGenerator
+    ) => ResponseData | Promise<ResponseData>,
+    ...rest: Array<any>
   ): void {
-    throw new Error('NOT Implemented')
+    // START save handler to our pretender map
+    let dataGenerator = this.dataGenerator
+    this.routeMapList.push(function routeMap(this: Pretender) {
+      this.get(
+        endPoint,
+        (req: Object) => {
+          return handler(req, dataGenerator)
+        },
+        ...rest
+      )
+    })
+    // END save handler to our pretender map
   }
 }
 

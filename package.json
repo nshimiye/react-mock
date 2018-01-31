@@ -78,6 +78,7 @@
     "@types/jest": "^22.0.0",
     "@types/node": "^8.0.0",
     "@types/uuid": "3.4.3",
+    "axios": "0.17.1",
     "colors": "^1.1.2",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",
@@ -108,7 +109,7 @@
   },
   "dependencies": {
     "faker": "4.1.0",
-    "pretender": "2.0.0",
+    "pretender": "git+https://github.com/fuse-mars/pretender.git",
     "uuid": "3.2.1"
   }
 }

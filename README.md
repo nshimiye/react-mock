@@ -6,7 +6,7 @@ Mocking api calls from React Applications, using Pretenderjs and Fakerjs.
 
 ```javascript
 import { Server, Faker, uid } from 'react-mock'
-const apiRoute = '/api/v1/guides'
+const endPoint = '/api/v1/guides'
 
 const todoSchema = {
   content: Faker.lorem.sentence(),
@@ -18,7 +18,7 @@ const requestHandler = (request, generator) => {
   return [200, { 'Content-Type': 'application/json' }, JSON.stringify(todoList)];
 }
 
-Server.mockGet(apiRoute, requestHandler)
+Server.mockGet(endPoint, requestHandler)
 Server.on() // to start mocking <host>/api/v1/guides API
 ```
 
@@ -47,7 +47,7 @@ const schema = {
   favoredCount: Faker.random.number(),
   isPublic: random.boolean(),
   author: {
-    id: uid.next(),
+    id: uid.next().value,
     name: Faker.name.findName(),
     picture: Faker.internet.avatar()
   }
