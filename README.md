@@ -9,8 +9,9 @@ import { Server, Faker, uid } from 'react-mock'
 const endPoint = '/api/v1/guides'
 
 const todoSchema = {
-  content: Faker.lorem.sentence(),
-  createdAt: Faker.date.past()
+  author: Faker.internet.email(),
+  content: () => Faker.lorem.sentence(),
+  createdAt: () => Faker.date.past()
 }
 
 const requestHandler = (request, generator) => {

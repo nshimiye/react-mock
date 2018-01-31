@@ -9,10 +9,10 @@
   "files": [
     "dist"
   ],
-  "author": " <>",
+  "author": "Marcellin Nshimiyimana<nmarcellin2@gmail.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/nshimiye/react-mock.git"
   },
   "license": "MIT",
   "engines": {
