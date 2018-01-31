@@ -51,7 +51,8 @@ describe('Mocking Requests', () => {
         })
     })
 
-    it('mocks get request with array response', () => {
+    /*
+    it('mocks get request with map response', () => {
       const requestHandler = (request, generator): [number, any, string] => {
         const todoList = generator.next(10, todoSchema, true)
         return [
@@ -77,5 +78,6 @@ describe('Mocking Requests', () => {
           return Server.off()
         })
     })
+    */
   })
 })
