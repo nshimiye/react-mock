@@ -3,6 +3,7 @@
 // ...
 import * as uuidV4 from 'uuid/v4'
 import * as faker from 'faker'
+import * as pretender from 'pretender'
 
 // START helper functions
 export interface IDataGenerator {
