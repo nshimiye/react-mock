@@ -48,7 +48,7 @@ export default class ServerClass {
       req: Object,
       generator: IDataGenerator
     ) => ResponseData | Promise<ResponseData>,
-    ...rest: Array<any>
+    ...others: Array<any>
   ): void {
     // START save handler to our pretender map
     let dataGenerator = this.dataGenerator
@@ -58,7 +58,7 @@ export default class ServerClass {
         (req: Object) => {
           return handler(req, dataGenerator)
         },
-        ...rest
+        ...others
       )
     })
     // END save handler to our pretender map
@@ -70,7 +70,7 @@ export default class ServerClass {
       req: Object,
       generator: IDataGenerator
     ) => ResponseData | Promise<ResponseData>,
-    ...rest: Array<any>
+    ...others: Array<any>
   ): void {
     // START save handler to our pretender map
     let dataGenerator = this.dataGenerator
@@ -80,7 +80,7 @@ export default class ServerClass {
         (req: Object) => {
           return handler(req, dataGenerator)
         },
-        ...rest
+        ...others
       )
     })
     // END save handler to our pretender map
