@@ -14,7 +14,7 @@ Mocking api calls from React Applications, using Pretenderjs and Fakerjs.
 
 ```javascript
 import { Server, Faker, uid } from 'react-mock'
-const endPoint = '/api/v1/guides'
+const endPoint = '/api/v1/todos'
 
 const todoSchema = {
   author: Faker.internet.email(),
@@ -28,7 +28,13 @@ const requestHandler = (request, generator) => {
 }
 
 Server.mockGet(endPoint, requestHandler)
-Server.on() // to start mocking <host>/api/v1/guides API
+Server.on() // to start mocking /api/v1/todos API
+```
+
+```javascript
+axios.get('/api/v1/todos').then(({ data }) => {
+  // data is an array of 10 todo objects
+})
 ```
 
 # Real use case
