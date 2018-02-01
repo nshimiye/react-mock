@@ -6,6 +6,11 @@ import Pretender, { ResponseData } from 'pretender'
 
 import DataGeneratorClass, { IDataGenerator } from './data-generator'
 
+/**
+ * type guard
+ * check to see if passed in object implements IDataGenerator
+ * @param object 
+ */
 function implementsIDG(object: any): object is IDataGenerator {
   return 'next' in object && typeof object.next === 'function'
 }
