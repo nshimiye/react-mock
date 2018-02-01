@@ -1,6 +1,6 @@
 {
   "name": "react-mock",
-  "version": "0.0.0-development",
+  "version": "2.0.0-development",
   "description": "Mocking api calls from React Applications, using Pretenderjs and Fakerjs",
   "keywords": [],
   "main": "dist/react-mock.umd.js",
