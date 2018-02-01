@@ -15,16 +15,24 @@ export interface IDataGenerator {
 }
 class DataGenerator implements IDataGenerator {
   nextObject<T>(count: number, schema: T): { [id: string]: T } {
-    throw new Error('NOT Implemented')
+    const map: { [id: string]: T } = this.nextArray(
+      count,
+      schema
+    ).reduce((map: { [key: string]: any }, obj) => {
+      map[obj.id] = obj
+      return map
+    }, {})
+
+    return map
   }
-  nextArray<T>(count: number, schema: T): Array<T> {
+  nextArray<T>(count: number, schema: T): Array<T | any> {
     // throw new Error('NOT Implemented')
 
     // START create object based on the schema
     let createData = (schema: any) => {
       return {
-        id: uid.next().value,
-        ...Object.keys(schema).reduce((ac: { [key: string]: any }, key) => {
+        id: uid.next(),
+        ...Object.keys(schema).reduce((ac: { [key: string]: T }, key) => {
           ac[key] =
             typeof schema[key] === 'function' ? schema[key]() : schema[key]
           return ac
@@ -46,9 +54,9 @@ class DataGenerator implements IDataGenerator {
     return this.nextArray<T>(count, schema)
   }
 }
-function* Uid() {
-  while (true) {
-    yield Faker.random.uuid()
+class UidClass {
+  next(): string {
+    return Faker.random.uuid()
   }
 }
 // END helper functions
@@ -97,5 +105,5 @@ export default class ServerClass {
 }
 
 export const Faker = faker
-export const uid = Uid()
+export const uid = new UidClass()
 export const Server = new ServerClass()

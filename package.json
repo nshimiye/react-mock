@@ -111,7 +111,6 @@
   },
   "dependencies": {
     "faker": "4.1.0",
-    "pretender": "git+https://github.com/fuse-mars/pretender.git",
-    "uuid": "3.2.1"
+    "pretender": "git+https://github.com/fuse-mars/pretender.git"
   }
 }
