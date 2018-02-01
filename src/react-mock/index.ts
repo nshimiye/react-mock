@@ -9,10 +9,10 @@ import DataGeneratorClass, { IDataGenerator } from './data-generator'
 /**
  * type guard
  * check to see if passed in object implements IDataGenerator
- * @param object 
+ * @param instance 
  */
-function implementsIDG(object: any): object is IDataGenerator {
-  return 'next' in object && typeof object.next === 'function'
+function implementsIDG(instance: any): instance is IDataGenerator {
+  return 'next' in instance && typeof instance.next === 'function'
 }
 
 export default class ServerClass {
