@@ -11,7 +11,23 @@ import ServerClass, {
  * ServerClass test
  */
 describe('Initialization', () => {
-  it('Server instance is exposed', () => {
+  afterEach(() => {
+    return Server.off()
+  })
+  it('exposes Server instance', () => {
     expect(Server).toBeInstanceOf(ServerClass)
+  })
+
+  it('allows users to pass in their own generator', () => {
+    // a generator is an object with "next" function in it (it returns array or JSON object)
+    let customDataGenerator: IDataGenerator = {
+      next() {
+        return []
+      }
+    }
+
+    let customServer = new ServerClass(customDataGenerator)
+
+    expect(customServer).toBeInstanceOf(ServerClass)
   })
 })

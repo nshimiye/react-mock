@@ -5,28 +5,34 @@ import ServerClass, {
   Faker,
   uid,
   IDataGenerator
-} from '../src/react-mock'
+} from '../../src/react-mock'
 
 describe('Get Request', () => {
   afterEach(() => {
     return Server.off()
   })
 
-  const apiRoute = '/api/v1/todos'
+  const apiRoute = '/api/v1/guides'
 
-  const todoSchema = {
-    author: Faker.internet.email(),
-    content: () => Faker.hacker.phrase(),
-    createdAt: () => Faker.date.past()
+  const schema = {
+    description: () => Faker.lorem.sentence(),
+    createdAt: () => Faker.date.past(),
+    favoredCount: () => Faker.random.number(),
+    isPublic: () => Faker.random.boolean(),
+    author: {
+      id: uid.next(),
+      name: Faker.name.findName(),
+      picture: Faker.internet.avatar()
+    }
   }
 
   it('mocks get request with array response', () => {
     const requestHandler = (request, generator): [number, any, string] => {
-      const todoList = generator.next(10, todoSchema)
+      const guides = generator.next(5, schema)
       return [
         200,
         { 'Content-Type': 'application/json' },
-        JSON.stringify(todoList)
+        JSON.stringify(guides)
       ]
     }
 
@@ -34,10 +40,10 @@ describe('Get Request', () => {
 
     return Server.on()
       .then(() => {
-        return axios.get('/api/v1/todos').then(({ data }) => {
+        return axios.get('/api/v1/guides').then(({ data }) => {
           // console.log('[axios] /api/v1/guides', data)
           // we assert that data is an array of 10 objects in it
-          return expect(data.length).toEqual(10)
+          return expect(data.length).toEqual(5)
         })
       })
       .then(() => {
@@ -47,11 +53,11 @@ describe('Get Request', () => {
 
   it('mocks get request with map response', () => {
     const requestHandler = (request, generator): [number, any, string] => {
-      const todoList = generator.next(10, todoSchema, true)
+      const guides = generator.next(5, schema, true)
       return [
         200,
         { 'Content-Type': 'application/json' },
-        JSON.stringify(todoList)
+        JSON.stringify(guides)
       ]
     }
 
@@ -59,7 +65,7 @@ describe('Get Request', () => {
 
     return Server.on()
       .then(() => {
-        return axios.get('/api/v1/todos').then(({ data }) => {
+        return axios.get('/api/v1/guides').then(({ data }) => {
           // console.log('[axios] /api/v1/guides', data)
           // we assert that data is a map of 10 objects where key is the id of each object
           let firstKey = Object.keys(data)[0]
