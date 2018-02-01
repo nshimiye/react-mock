@@ -62,7 +62,7 @@ const schema = {
   favoredCount: Faker.random.number(),
   isPublic: random.boolean(),
   author: {
-    id: uid.next().value,
+    id: uid.next(),
     name: Faker.name.findName(),
     picture: Faker.internet.avatar()
   }
