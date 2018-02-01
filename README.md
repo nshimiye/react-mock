@@ -1,5 +1,7 @@
 # React Mock
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nshimiye/react-mock.svg)](https://greenkeeper.io/)
+
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Build Status](https://travis-ci.org/nshimiye/react-mock.svg?branch=master)](https://travis-ci.org/nshimiye/react-mock)
 [![Coverage Status](https://coveralls.io/repos/github/nshimiye/react-mock/badge.svg?branch=master)](https://coveralls.io/github/nshimiye/react-mock?branch=master)
