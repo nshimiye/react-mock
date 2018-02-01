@@ -6,7 +6,9 @@ import Pretender, { ResponseData } from 'pretender'
 
 import DataGeneratorClass, { IDataGenerator } from './data-generator'
 
-// END helper functions
+function implementsIDG(object: any): object is IDataGenerator {
+  return 'next' in object && typeof object.next === 'function'
+}
 
 export default class ServerClass {
   private pretender: Pretender
@@ -14,7 +16,12 @@ export default class ServerClass {
 
   constructor(
     private dataGenerator: IDataGenerator = new DataGeneratorClass()
-  ) {}
+  ) {
+    console.assert(
+      implementsIDG(dataGenerator),
+      'generator has to be an object with a next function in it'
+    )
+  }
 
   on(): Promise<null | Error> {
     return new Promise(resolve => {
