@@ -19,7 +19,7 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts' 'test/src/react-mock/node_modules/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",
     "start": "rollup -c rollup.config.ts -w",
@@ -35,7 +35,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {
-    "{src,test}/**/*.ts": [
+    "{src/react-mock,test}/**/*.ts": [
       "prettier --write --no-semi --single-quote",
       "git add"
     ]
