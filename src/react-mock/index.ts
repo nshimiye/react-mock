@@ -72,18 +72,16 @@ export default class ServerClass {
     ) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
-    // START save handler to our pretender map
-    let dataGenerator = this.dataGenerator
+    let dg = this.dataGenerator
     this.routeMapList.push(function routeMap(this: Pretender) {
       this.post(
         endPoint,
         (req: Object) => {
-          return handler(req, dataGenerator)
+          return handler(req, dg)
         },
         ...others
       )
     })
-    // END save handler to our pretender map
   }
 }
 
