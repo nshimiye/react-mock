@@ -63,6 +63,28 @@ export default class ServerClass {
     })
     // END save handler to our pretender map
   }
+
+  mockPost(
+    endPoint: string,
+    handler: (
+      req: Object,
+      generator: IDataGenerator
+    ) => ResponseData | Promise<ResponseData>,
+    ...rest: Array<any>
+  ): void {
+    // START save handler to our pretender map
+    let dataGenerator = this.dataGenerator
+    this.routeMapList.push(function routeMap(this: Pretender) {
+      this.post(
+        endPoint,
+        (req: Object) => {
+          return handler(req, dataGenerator)
+        },
+        ...rest
+      )
+    })
+    // END save handler to our pretender map
+  }
 }
 
 export const Faker = faker
