@@ -6,8 +6,10 @@ import Pretender, { ResponseData } from 'pretender'
 
 import DataGeneratorClass, { IDataGenerator } from './data-generator'
 
+import { createGetRoute } from './methods/get'
 import { createDeleteRoute } from './methods/delete'
 import { createPatchRoute } from './methods/patch'
+import { createPostRoute } from './methods/post'
 import { createPutRoute } from './methods/put'
 
 /**
@@ -56,15 +58,9 @@ export default class ServerClass {
   ): void {
     // START save handler to our pretender map
     let dataGenerator = this.dataGenerator
-    this.routeMapList.push(function routeMap(this: Pretender) {
-      this.get(
-        endPoint,
-        (req: Object) => {
-          return handler(req, dataGenerator)
-        },
-        ...others
-      )
-    })
+    this.routeMapList.push(
+      createGetRoute(this.dataGenerator, endPoint, handler, ...others)
+    )
     // END save handler to our pretender map
   }
 
@@ -77,15 +73,9 @@ export default class ServerClass {
     ...others: Array<any>
   ): void {
     let dg = this.dataGenerator
-    this.routeMapList.push(function routeMap(this: Pretender) {
-      this.post(
-        endPoint,
-        (req: Object) => {
-          return handler(req, dg)
-        },
-        ...others
-      )
-    })
+    this.routeMapList.push(
+      createPostRoute(this.dataGenerator, endPoint, handler, ...others)
+    )
   }
 
   mockPut(

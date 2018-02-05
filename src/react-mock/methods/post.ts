@@ -7,7 +7,7 @@ import { IDataGenerator } from '../data-generator'
  * @param handler 
  * @param others 
  */
-export function createDeleteRoute(
+export function createPostRoute(
   dg: IDataGenerator,
   endPoint: string,
   handler: (
@@ -19,8 +19,8 @@ export function createDeleteRoute(
   /**
    * routeMap refers to "pretenderjs" based map of routes that can be passed to an instance of pretenderjs
    */
-  return function deleteRouteMap(this: Pretender) {
-    this.delete(
+  return function postRouteMap(this: Pretender) {
+    this.post(
       endPoint,
       (req: Object) => {
         return handler(req, dg)
@@ -30,4 +30,4 @@ export function createDeleteRoute(
   }
 }
 
-export default createDeleteRoute
+export default createPostRoute
