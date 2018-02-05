@@ -29,7 +29,7 @@ describe('Patch Request', () => {
   it('mocks patch request', () => {
     const requestHandler = (request, generator): [number, any, string] => {
       const id = request.params.id
-      const isPublic = request.data.isPublic
+      const { isPublic } = JSON.parse(request.requestBody)
       const guide = { ...schema, isPublic, id }
       return [
         200,

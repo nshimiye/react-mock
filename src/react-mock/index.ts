@@ -6,6 +6,7 @@ import Pretender, { ResponseData } from 'pretender'
 
 import DataGeneratorClass, { IDataGenerator } from './data-generator'
 
+import { createPatchRoute } from './methods/patch'
 import { createPutRoute } from './methods/put'
 
 /**
@@ -96,6 +97,18 @@ export default class ServerClass {
   ): void {
     this.routeMapList.push(
       createPutRoute(this.dataGenerator, endPoint, handler, ...others)
+    )
+  }
+  mockPatch(
+    endPoint: string,
+    handler: (
+      req: Object,
+      generator: IDataGenerator
+    ) => ResponseData | Promise<ResponseData>,
+    ...others: Array<any>
+  ): void {
+    this.routeMapList.push(
+      createPatchRoute(this.dataGenerator, endPoint, handler, ...others)
     )
   }
 }
