@@ -59,6 +59,10 @@
       "tsx",
       "js"
     ],
+    "testEnvironmentOptions": {
+      "url": "http://localhost:3000/",
+      "referrer": "http://localhost:3000/"
+    },
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/test/"
