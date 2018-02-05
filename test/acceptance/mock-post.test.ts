@@ -7,7 +7,7 @@ import ServerClass, {
   IDataGenerator
 } from '../../src/react-mock'
 
-describe('Get Request', () => {
+describe('Post Request', () => {
   afterEach(() => {
     return Server.off()
   })
@@ -31,7 +31,7 @@ describe('Get Request', () => {
     const requestHandler = (request, generator): [number, any, string] => {
       const guide = { ...schema, id }
       return [
-        200,
+        201,
         { 'Content-Type': 'application/json' },
         JSON.stringify(guide)
       ]
@@ -39,9 +39,10 @@ describe('Get Request', () => {
 
     Server.mockPost(apiRoute, requestHandler, 1000)
 
+    let guideObject = schema
     return Server.on()
       .then(() => {
-        return axios.post('/api/v1/guides').then(({ data }) => {
+        return axios.post('/api/v1/guides', guideObject).then(({ data }) => {
           // console.log('[axios] /api/v1/guides', data)
           // we assert that data is an object that has an id value in it
           return expect(data.id).toEqual(id)

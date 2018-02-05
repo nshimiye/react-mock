@@ -7,18 +7,18 @@ import ServerClass, {
   IDataGenerator
 } from '../../src/react-mock'
 
-describe('Get Request', () => {
+describe('Patch Request', () => {
   afterEach(() => {
     return Server.off()
   })
 
-  const apiRoute = '/api/v1/guides'
+  const apiRoute = '/api/v1/guides/:id'
 
   const schema = {
-    description: () => Faker.lorem.sentence(),
-    createdAt: () => Faker.date.past(),
-    favoredCount: () => Faker.random.number(),
-    isPublic: () => Faker.random.boolean(),
+    description: Faker.lorem.sentence(),
+    createdAt: Faker.date.past(),
+    favoredCount: Faker.random.number(),
+    isPublic: false,
     author: {
       id: uid.next(),
       name: Faker.name.findName(),
@@ -26,52 +26,32 @@ describe('Get Request', () => {
     }
   }
 
-  it('mocks get request with array response', () => {
+  it('mocks patch request', () => {
     const requestHandler = (request, generator): [number, any, string] => {
-      const guides = generator.next(5, schema)
+      const id = request.params.id
+      const isPublic = request.data.isPublic
+      const guide = { ...schema, isPublic, id }
       return [
         200,
         { 'Content-Type': 'application/json' },
-        JSON.stringify(guides)
+        JSON.stringify(guide)
       ]
     }
 
-    Server.mockGet(apiRoute, requestHandler, 1000)
+    Server.mockPatch(apiRoute, requestHandler, 1000)
 
-    return Server.on()
-      .then(() => {
-        return axios.get('/api/v1/guides').then(({ data }) => {
-          // console.log('[axios] /api/v1/guides', data)
-          // we assert that data is an array of 10 objects in it
-          return expect(data.length).toEqual(5)
-        })
-      })
-      .then(() => {
-        return Server.off()
-      })
-  })
-
-  it('mocks get request with map response', () => {
-    const requestHandler = (request, generator): [number, any, string] => {
-      const guides = generator.next(5, schema, true)
-      return [
-        200,
-        { 'Content-Type': 'application/json' },
-        JSON.stringify(guides)
-      ]
+    const guideId = uid.next()
+    const guideObject = {
+      isPublic: true
     }
-
-    Server.mockGet(apiRoute, requestHandler, 1000)
-
     return Server.on()
       .then(() => {
-        return axios.get('/api/v1/guides').then(({ data }) => {
-          // console.log('[axios] /api/v1/guides', data)
-          // we assert that data is a map of 10 objects where key is the id of each object
-          let firstKey = Object.keys(data)[0]
-          let firstObject = data[firstKey]
-          return expect(firstObject.id).toEqual(firstKey)
-        })
+        return axios
+          .patch(`/api/v1/guides/${guideId}`, guideObject)
+          .then(({ data }) => {
+            // we assert that data is an object whose id is equal to guideId and "isPublic" is true
+            return expect(data.id).toEqual(guideId)
+          })
       })
       .then(() => {
         return Server.off()
