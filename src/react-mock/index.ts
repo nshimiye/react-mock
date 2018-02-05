@@ -6,6 +6,7 @@ import Pretender, { ResponseData } from 'pretender'
 
 import DataGeneratorClass, { IDataGenerator } from './data-generator'
 
+import { createDeleteRoute } from './methods/delete'
 import { createPatchRoute } from './methods/patch'
 import { createPutRoute } from './methods/put'
 
@@ -109,6 +110,18 @@ export default class ServerClass {
   ): void {
     this.routeMapList.push(
       createPatchRoute(this.dataGenerator, endPoint, handler, ...others)
+    )
+  }
+  mockDelete(
+    endPoint: string,
+    handler: (
+      req: Object,
+      generator: IDataGenerator
+    ) => ResponseData | Promise<ResponseData>,
+    ...others: Array<any>
+  ): void {
+    this.routeMapList.push(
+      createDeleteRoute(this.dataGenerator, endPoint, handler, ...others)
     )
   }
 }
