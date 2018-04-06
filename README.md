@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/nshimiye/react-mock/badge.svg?branch=master)](https://coveralls.io/github/nshimiye/react-mock?branch=master)
 [![Dev Dependencies](https://david-dm.org/nshimiye/react-mock/dev-status.svg)](https://david-dm.org/nshimiye/react-mock?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/nshimiye/react-mock.svg)](https://greenkeeper.io/)
-[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/nshimiye)
+[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/nshimiyetech)
 
 
 Mocking api calls from React Applications, using Pretenderjs and Fakerjs.
