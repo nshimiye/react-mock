@@ -1,11 +1,6 @@
 // import ServerClass, { Server, Faker, uid } from 'react-mock'
 import axios from 'axios'
-import ServerClass, {
-  Server,
-  Faker,
-  uid,
-  IDataGenerator
-} from '../../src/react-mock'
+import ServerClass, { Server, Faker, uid, IDataGenerator } from '../../src/react-mock'
 
 describe('Options Request', () => {
   afterEach(() => {
@@ -23,8 +18,7 @@ describe('Options Request', () => {
         202,
         {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Methods':
-            'POST, GET, PUT, DELETE, HEAD, OPTIONS'
+          'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, HEAD, OPTIONS'
         },
         null
       ]
@@ -36,11 +30,7 @@ describe('Options Request', () => {
     return Server.on()
       .then(() => {
         return axios.options(`/api/v1/guides`).then(({ headers }) => {
-          console.log('[]', headers)
-          // we assert that data is an object whose totalCount is equal to previously created in the schema
-          return expect(headers['access-control-allow-methods']).toEqual(
-            allowedMethods
-          )
+          return expect(headers['access-control-allow-methods']).toEqual(allowedMethods)
         })
       })
       .then(() => {
