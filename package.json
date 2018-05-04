@@ -1,6 +1,6 @@
 {
   "name": "react-mock",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Mocking api calls from React Applications, using Pretenderjs and Fakerjs",
   "keywords": [],
   "main": "dist/react-mock.umd.js",
@@ -19,6 +19,7 @@
     "node": ">=6.0.0"
   },
   "scripts": {
+    "postinstall": "sh custom/postinstall.sh",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts' 'test/src/react-mock/node_modules/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",

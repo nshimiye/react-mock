@@ -17,23 +17,22 @@ import { createPutRoute } from './methods/put'
 /**
  * type guard
  * check to see if passed in object implements IDataGenerator
- * @param instance 
+ * @param instance
  */
 function implementsIDG(instance: any): instance is IDataGenerator {
   return 'next' in instance && typeof instance.next === 'function'
 }
 
 export default class ServerClass {
-  private pretender: Pretender
+  private pretender: Pretender | null
   private routeMapList: Array<() => void> = []
 
-  constructor(
-    private dataGenerator: IDataGenerator = new DataGeneratorClass()
-  ) {
+  constructor(private dataGenerator: IDataGenerator = new DataGeneratorClass()) {
     console.assert(
       implementsIDG(dataGenerator),
       'generator has to be an object with a next function in it'
     )
+    this.pretender = null
   }
 
   on(): Promise<null | Error> {
@@ -52,93 +51,58 @@ export default class ServerClass {
 
   mockGet(
     endPoint: string,
-    handler: (
-      req: Object,
-      generator: IDataGenerator
-    ) => ResponseData | Promise<ResponseData>,
+    handler: (req: Object, generator: IDataGenerator) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
     // START save handler to our pretender map
     let dataGenerator = this.dataGenerator
-    this.routeMapList.push(
-      createGetRoute(this.dataGenerator, endPoint, handler, ...others)
-    )
+    this.routeMapList.push(createGetRoute(this.dataGenerator, endPoint, handler, ...others))
     // END save handler to our pretender map
   }
 
   mockPost(
     endPoint: string,
-    handler: (
-      req: Object,
-      generator: IDataGenerator
-    ) => ResponseData | Promise<ResponseData>,
+    handler: (req: Object, generator: IDataGenerator) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
     let dg = this.dataGenerator
-    this.routeMapList.push(
-      createPostRoute(this.dataGenerator, endPoint, handler, ...others)
-    )
+    this.routeMapList.push(createPostRoute(this.dataGenerator, endPoint, handler, ...others))
   }
 
   mockPut(
     endPoint: string,
-    handler: (
-      req: Object,
-      generator: IDataGenerator
-    ) => ResponseData | Promise<ResponseData>,
+    handler: (req: Object, generator: IDataGenerator) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
-    this.routeMapList.push(
-      createPutRoute(this.dataGenerator, endPoint, handler, ...others)
-    )
+    this.routeMapList.push(createPutRoute(this.dataGenerator, endPoint, handler, ...others))
   }
   mockPatch(
     endPoint: string,
-    handler: (
-      req: Object,
-      generator: IDataGenerator
-    ) => ResponseData | Promise<ResponseData>,
+    handler: (req: Object, generator: IDataGenerator) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
-    this.routeMapList.push(
-      createPatchRoute(this.dataGenerator, endPoint, handler, ...others)
-    )
+    this.routeMapList.push(createPatchRoute(this.dataGenerator, endPoint, handler, ...others))
   }
   mockDelete(
     endPoint: string,
-    handler: (
-      req: Object,
-      generator: IDataGenerator
-    ) => ResponseData | Promise<ResponseData>,
+    handler: (req: Object, generator: IDataGenerator) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
-    this.routeMapList.push(
-      createDeleteRoute(this.dataGenerator, endPoint, handler, ...others)
-    )
+    this.routeMapList.push(createDeleteRoute(this.dataGenerator, endPoint, handler, ...others))
   }
   mockHead(
     endPoint: string,
-    handler: (
-      req: Object,
-      generator: IDataGenerator
-    ) => ResponseData | Promise<ResponseData>,
+    handler: (req: Object, generator: IDataGenerator) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
-    this.routeMapList.push(
-      createHeadRoute(this.dataGenerator, endPoint, handler, ...others)
-    )
+    this.routeMapList.push(createHeadRoute(this.dataGenerator, endPoint, handler, ...others))
   }
   mockOptions(
     endPoint: string,
-    handler: (
-      req: Object,
-      generator: IDataGenerator
-    ) => ResponseData | Promise<ResponseData>,
+    handler: (req: Object, generator: IDataGenerator) => ResponseData | Promise<ResponseData>,
     ...others: Array<any>
   ): void {
-    this.routeMapList.push(
-      createOptionsRoute(this.dataGenerator, endPoint, handler, ...others)
-    )
+    this.routeMapList.push(createOptionsRoute(this.dataGenerator, endPoint, handler, ...others))
   }
 }
 
