@@ -1,11 +1,6 @@
 // import ServerClass, { Server, Faker, uid } from 'react-mock'
 import axios from 'axios'
-import ServerClass, {
-  Server,
-  Faker,
-  uid,
-  IDataGenerator
-} from '../../src/react-mock'
+import ServerClass, { Server, Faker, uid, IDataGenerator } from '../../src/react-mock'
 
 describe('Head Request', () => {
   afterEach(() => {
@@ -24,17 +19,13 @@ describe('Head Request', () => {
    * HEAD /api/v1/guides
    * => {
    *  totalCount: 50,
-   *   lastUpdate: 12:00PM, 
+   *   lastUpdate: 12:00PM,
    * }
    */
   it('mocks head request to get status of our guides resource', () => {
     const requestHandler = (request, generator): [number, any, string] => {
       const status = { ...schema }
-      return [
-        202,
-        { 'Content-Type': 'application/json' },
-        JSON.stringify(status)
-      ]
+      return [202, { 'Content-Type': 'application/json' }, JSON.stringify(status)]
     }
 
     Server.mockHead(apiRoute, requestHandler, 1000)
