@@ -19,6 +19,7 @@
     "node": ">=6.0.0"
   },
   "scripts": {
+    "postinstall": "cp -rf custom/@types/axios/index.d.ts node_modules/axios/index.d.ts",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts' 'test/src/react-mock/node_modules/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",
