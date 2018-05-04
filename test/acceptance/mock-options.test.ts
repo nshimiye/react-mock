@@ -16,8 +16,7 @@ describe('Options Request', () => {
 
   /**
    * Usecase: User wants to see what method are exposed by guides API
-  */
-
+   */
   it('mocks head request to get status of our guides resource', () => {
     const requestHandler = (request, generator): [number, any, string] => {
       return [

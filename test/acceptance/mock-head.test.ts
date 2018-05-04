@@ -14,20 +14,19 @@ describe('Head Request', () => {
 
   const apiRoute = '/api/v1/guides'
 
-  /**
-   * Usecase: User wants to easily see how many guides are in the system and
-   * the time of the last entry.
-    HEAD /api/v1/guides
-    => {
-      totalCount: 50,
-      lastUpdate: 12:00PM, 
-    }
-  */
   const schema = {
     totalCount: Faker.random.number(),
     lastUpdate: Faker.date.past()
   }
-
+  /**
+   * Usecase: User wants to easily see how many guides are in the system and
+   * the time of the last entry.
+   * HEAD /api/v1/guides
+   * => {
+   *  totalCount: 50,
+   *   lastUpdate: 12:00PM, 
+   * }
+   */
   it('mocks head request to get status of our guides resource', () => {
     const requestHandler = (request, generator): [number, any, string] => {
       const status = { ...schema }
