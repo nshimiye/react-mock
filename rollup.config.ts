@@ -11,10 +11,9 @@ const libraryName = 'react-mock'
 export default {
   input: `src/${libraryName}/index.ts`,
   output: [
-    { file: pkg.main, name: camelCase(libraryName), format: 'umd' },
-    { file: pkg.module, format: 'es' },
+    { file: pkg.main, exports: 'named', name: camelCase(libraryName), format: 'umd' },
+    { file: pkg.module, format: 'es', sourcemap: true },
   ],
-  sourcemap: true,
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
   external: [],
   watch: {
