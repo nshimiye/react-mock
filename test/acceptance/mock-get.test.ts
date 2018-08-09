@@ -1,11 +1,6 @@
 // import ServerClass, { Server, Faker, uid } from 'react-mock'
 import axios from 'axios'
-import ServerClass, {
-  Server,
-  Faker,
-  uid,
-  IDataGenerator
-} from '../../src/react-mock'
+import ServerClass, { Server, Faker, uid, IDataGenerator } from '../../src/react-mock'
 
 describe('Get Request', () => {
   afterEach(() => {
@@ -27,13 +22,9 @@ describe('Get Request', () => {
   }
 
   it('mocks get request with array response', () => {
-    const requestHandler = (request, generator): [number, any, string] => {
+    const requestHandler = (request, generator: IDataGenerator): [number, any, string] => {
       const guides = generator.next(5, schema)
-      return [
-        200,
-        { 'Content-Type': 'application/json' },
-        JSON.stringify(guides)
-      ]
+      return [200, { 'Content-Type': 'application/json' }, JSON.stringify(guides)]
     }
 
     Server.mockGet(apiRoute, requestHandler, 1000)
@@ -54,11 +45,7 @@ describe('Get Request', () => {
   it('mocks get request with map response', () => {
     const requestHandler = (request, generator): [number, any, string] => {
       const guides = generator.next(5, schema, true)
-      return [
-        200,
-        { 'Content-Type': 'application/json' },
-        JSON.stringify(guides)
-      ]
+      return [200, { 'Content-Type': 'application/json' }, JSON.stringify(guides)]
     }
 
     Server.mockGet(apiRoute, requestHandler, 1000)

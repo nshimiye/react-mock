@@ -109,4 +109,5 @@ export default class ServerClass {
 export const Faker = faker
 export { uid } from './uid'
 export { IDataGenerator } from './data-generator'
+export const FakerGenerator = new DataGeneratorClass()
 export const Server = new ServerClass()

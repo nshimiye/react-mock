@@ -1,11 +1,6 @@
 // import ServerClass, { Server, Faker, uid } from 'react-mock'
 import axios from 'axios'
-import ServerClass, {
-  Server,
-  Faker,
-  uid,
-  IDataGenerator
-} from '../../src/react-mock'
+import ServerClass, { Server, Faker, uid, FakerGenerator } from '../../src/react-mock'
 
 describe('Post Request', () => {
   afterEach(() => {
@@ -30,11 +25,7 @@ describe('Post Request', () => {
   it('mocks post request with an object response that has id', () => {
     const requestHandler = (request, generator): [number, any, string] => {
       const guide = { ...schema, id }
-      return [
-        201,
-        { 'Content-Type': 'application/json' },
-        JSON.stringify(guide)
-      ]
+      return [201, { 'Content-Type': 'application/json' }, JSON.stringify(guide)]
     }
 
     Server.mockPost(apiRoute, requestHandler, 1000)
