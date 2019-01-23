@@ -34,7 +34,8 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "cypress:open": "cypress open"
   },
   "lint-staged": {
     "{src/react-mock,test}/**/*.ts": [
@@ -114,7 +115,7 @@
     "tslint-config-prettier": "^1.1.0",
     "tslint-config-standard": "^7.0.0",
     "typedoc": "^0.11.0",
-    "typescript": "2.7.2",
+    "typescript": "3.2.2",
     "validate-commit-msg": "^2.12.2"
   }
 }

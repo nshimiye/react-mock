@@ -1,6 +1,9 @@
+import { Server as ReactMockServer, Faker, FakerGenerator } from "../../../dist/react-mock.umd";
+
 describe('Deep Structures', function() {
     before(function() {
       // runs once before all tests in the block
+      console.log('ReactMock', ReactMockServer, Faker);
     })
   
     after(function() {
@@ -18,6 +21,7 @@ describe('Deep Structures', function() {
 
     context('1 inner obect', function() {
         it('can generate data', function() {
+          expect(FakerGenerator).to.be.an('object');
           expect(1 + 2).to.eq(3)
         })
     })
