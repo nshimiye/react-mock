@@ -2,6 +2,7 @@ language: node_js
 branches:
   only:
     - master
+    - testing/e2e
     - /^greenkeeper/.*$/
 cache:
   yarn: true
