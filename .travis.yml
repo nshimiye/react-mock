@@ -11,8 +11,8 @@ node_js:
   - node
 script:
   - npm run test:prod
-  - npx cypress run 
   - npm run build
+  - npx cypress run
 deploy:
   - skip_cleanup: true
   - provider: script
