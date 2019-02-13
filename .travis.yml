@@ -1,8 +1,9 @@
 language: node_js
 branches:
   only:
-    - master
     - testing/e2e
+    - master
+    - release
     - /^greenkeeper/.*$/
 notifications:
   email: false
@@ -10,9 +11,14 @@ node_js:
   - node
 script:
   - npm run test:prod
-  - npx capacitor run 
+  - npx cypress run 
   - npm run build
-after_success:
-  - npm run report-coverage
-  - npm run deploy-docs
-  - npm run semantic-release
+deploy:
+  - skip_cleanup: true
+  - provider: script
+    script:
+      - npm run report-coverage
+      - npm run deploy-docs
+      - npm run semantic-release
+    on:
+      branch: release
