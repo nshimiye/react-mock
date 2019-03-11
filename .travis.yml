@@ -10,6 +10,7 @@ notifications:
 node_js:
   - "10"
 before_script:
+  - npx lerna bootstrap
   - npx lerna run pretest:ci
 script:
   - npx lerna run test:ci
