@@ -1,0 +1,26 @@
+language: node_js
+branches:
+  only:
+    - testing/e2e
+    - master
+    - release
+    - /^greenkeeper/.*$/
+notifications:
+  email: false
+node_js:
+  - "10"
+before_script:
+  - npx lerna run pretest:ci
+script:
+  - npx lerna run test:ci
+after_script:
+  - npx lerna run posttest:ci
+# deploy:
+#   - skip_cleanup: true
+#   - provider: script
+#     script:
+#       - npm run report-coverage
+#       - npm run deploy-docs
+#       - npm run semantic-release
+#     on:
+#       branch: release

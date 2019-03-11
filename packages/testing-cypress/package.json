@@ -24,7 +24,9 @@
   },
   "scripts": {
     "test": "npm run cypress:open",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:ci": "npm run cypress:run"
   },
   "bugs": {
     "url": "https://github.com/nshimiye/react-mock/issues"

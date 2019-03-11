@@ -38,7 +38,11 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepublish": "npm run build",
+    "pretest:ci": "npm run lint",
+    "test:ci": "npm run test:prod",
+    "posttest:ci": "npm run report-coverage && npm run deploy-docs"
   },
   "lint-staged": {
     "{src/react-mock,test}/**/*.ts": [
