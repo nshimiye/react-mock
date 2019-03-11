@@ -1,4 +1,4 @@
-import { Server as ReactMockServer, Faker, FakerGenerator } from "../../../dist/react-mock.umd";
+import { Server as ReactMockServer, Faker, FakerGenerator } from "react-mock";
 
 describe('Deep Structures', function() {
     before(function() {

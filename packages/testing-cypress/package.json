@@ -1,0 +1,38 @@
+{
+  "name": "testing-cypress",
+  "version": "6.1.0",
+  "description": "Testing react-mock with cypress",
+  "keywords": [
+    "cypress",
+    "javascript",
+    "testing"
+  ],
+  "author": "Marcellin Nshimiyimana <marcellin2@gmail.com>",
+  "homepage": "https://github.com/nshimiye/react-mock",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nshimiye/react-mock.git"
+  },
+  "scripts": {
+    "test": "npm run cypress:open",
+    "cypress:open": "cypress open"
+  },
+  "bugs": {
+    "url": "https://github.com/nshimiye/react-mock/issues"
+  },
+  "devDependencies": {
+    "cypress": "3.1.5"
+  },
+  "dependencies": {
+    "react-mock": "6.1.0"
+  }
+}
