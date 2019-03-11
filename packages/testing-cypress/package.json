@@ -1,5 +1,6 @@
 {
   "name": "testing-cypress",
+  "private": true,
   "version": "6.1.0",
   "description": "Testing react-mock with cypress",
   "keywords": [
