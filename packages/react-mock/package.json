@@ -97,7 +97,6 @@
     "commitizen": "^3.0.0",
     "coveralls": "^3.0.0",
     "cross-env": "^5.0.1",
-    "cypress": "^3.1.4",
     "cz-conventional-changelog": "^2.0.0",
     "faker": "4.1.0",
     "husky": "^1.0.0",
